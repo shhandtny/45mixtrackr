@@ -1,0 +1,239 @@
+{
+  "timestamp": "2026-03-31T18:03:35.792Z",
+  "reason": "compaction",
+  "status": {
+    "version": "3.0",
+    "lastUpdated": "2026-03-31T17:58:45.455Z",
+    "activeFeatures": [
+      "webApp-cover-downloader",
+      "upload",
+      "[id]"
+    ],
+    "primaryFeature": "webApp-cover-downloader",
+    "features": {
+      "webApp-cover-downloader": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-31T17:46:16.430Z",
+          "lastUpdated": "2026-03-31T17:58:45.455Z"
+        },
+        "lastFile": "/Users/sh/Code/webApp-cover-downloader/next.config.ts"
+      },
+      "upload": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-31T17:55:35.285Z",
+          "lastUpdated": "2026-03-31T17:55:35.285Z"
+        },
+        "lastFile": "/Users/sh/Code/webApp-cover-downloader/app/api/upload/route.ts"
+      },
+      "[id]": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-31T17:55:44.388Z",
+          "lastUpdated": "2026-03-31T17:55:59.398Z"
+        },
+        "lastFile": "/Users/sh/Code/webApp-cover-downloader/app/api/download/[id]/route.ts"
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-03-31T17:07:34.747Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-03-31T17:58:45.455Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-03-31T17:46:16.430Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:46:22.354Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:46:25.222Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:46:46.316Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:46:55.461Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:48:02.034Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:48:06.539Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:49:40.037Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:50:00.499Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:50:26.338Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:52:15.508Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:55:17.233Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:55:35.286Z",
+        "feature": "upload",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:55:44.389Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:55:49.282Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:55:59.398Z",
+        "feature": "[id]",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:57:16.471Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:57:33.787Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:57:40.502Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:57:44.780Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:57:56.544Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:58:03.560Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:58:11.217Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:58:26.021Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:58:30.397Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-31T17:58:45.455Z",
+        "feature": "webApp-cover-downloader",
+        "phase": "do",
+        "action": "updated"
+      }
+    ],
+    "stateMachine": {
+      "defaultWorkflow": "default",
+      "activeWorkflows": {},
+      "totalTransitions": 0
+    },
+    "automation": {
+      "globalLevel": 2,
+      "trustScore": 40,
+      "pendingApprovals": 0,
+      "lastGateResult": null
+    },
+    "team": {
+      "enabled": true,
+      "stateFile": ".bkit/runtime/agent-state.json",
+      "eventsFile": ".bkit/runtime/agent-events.jsonl"
+    }
+  }
+}

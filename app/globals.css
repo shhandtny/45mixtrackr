@@ -1,0 +1,28 @@
+@import url(https://db.onlinewebfonts.com/c/6c64d0b07322573d2fe791ca8b55850a?family=Synthemesc+W00+Regular);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design Ref: §6 UI Design — Spotify color tokens */
+:root {
+  --bg-base:       #121212;
+  --bg-surface:    #181818;
+  --bg-highlight:  #282828;
+  --text-primary:  #FFFFFF;
+  --text-secondary:#B3B3B3;
+  --accent-orange: #F97316;
+  --text-dim:      #535353;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Circular', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@keyframes slide {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(200%); }
+  100% { transform: translateX(200%); }
+}
