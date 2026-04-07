@@ -1,0 +1,18 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/sitemap.xml/route": "/sitemap.xml",
+  "/apple-icon.png/route": "/apple-icon.png",
+  "/favicon.ico/route": "/favicon.ico",
+  "/icon.png/route": "/icon.png",
+  "/api/download/[id]/route": "/api/download/[id]",
+  "/api/result/[id]/route": "/api/result/[id]",
+  "/api/status/[id]/route": "/api/status/[id]",
+  "/api/upload/route": "/api/upload",
+  "/blog/[slug]/page": "/blog/[slug]",
+  "/blog/page": "/blog",
+  "/about/page": "/about",
+  "/contact/page": "/contact",
+  "/privacy/page": "/privacy",
+  "/page": "/",
+  "/terms/page": "/terms"
+}

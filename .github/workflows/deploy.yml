@@ -32,8 +32,4 @@ jobs:
             export PATH="/opt/alt/alt-nodejs20/root/usr/bin:$PATH"
             cd /home/u530278073/domains/45mixtrackr.com/nodejs
             git pull origin main
-            npm install
-            npm run build
-            curl -L "https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/ffmpeg-linux-x64.gz" -o node_modules/ffmpeg-static/ffmpeg.gz
-            gunzip -f node_modules/ffmpeg-static/ffmpeg.gz
-            chmod +x node_modules/ffmpeg-static/ffmpeg
+            npm install --omit=dev
