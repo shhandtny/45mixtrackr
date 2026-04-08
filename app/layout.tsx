@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     'album cover downloader',
     'SRT subtitle generator',
   ],
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     type: 'website',
     siteName: '45 Mix Trackr',

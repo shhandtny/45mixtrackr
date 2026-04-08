@@ -11,7 +11,30 @@ export default function AboutPage() {
   return (
     <PageShell>
     <div className="max-w-3xl text-white">
-      <h1 className="text-3xl font-bold mb-4">About 45 Mix Trackr</h1>
+      <h1 className="text-3xl mb-8">About <span className="font-synthemesc">45mixtrackr</span></h1>
+
+      {/* Created by SH */}
+      <section className="mb-10 bg-spotify-surface rounded-xl p-6">
+        <div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/me.jpg"
+            alt="SH"
+            className="w-40 h-40 rounded-xl object-cover float-left mr-5 mb-2"
+          />
+          <p className="text-xs uppercase tracking-widest text-[#6B6B6B] mb-2">Created by SH</p>
+          <p className="text-[#B3B3B3] text-sm leading-relaxed">
+            45 Mix Trackr was created by SH, a New York–based designer who DJs vinyl as a hobby.
+            While recording and editing mixes, SH realized how time-consuming it was to manually
+            identify tracks, organize metadata, and prepare everything for publishing.
+          </p>
+          <p className="text-[#B3B3B3] text-sm leading-relaxed mt-2">
+            What started as a personal solution to speed up this workflow turned into a tool
+            designed to help other DJs and creators do the same — faster and easier.
+          </p>
+          <div className="clear-left" />
+        </div>
+      </section>
 
       <section className="space-y-6 text-[#B3B3B3] leading-relaxed">
 

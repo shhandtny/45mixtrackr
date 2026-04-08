@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
-import { blogPosts, getBlogPost } from '@/lib/blog-posts';
+import { blogPosts, getBlogPost, getBlogCoverImage } from '@/lib/blog-posts';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -172,6 +172,14 @@ export default async function BlogPostPage({ params }: Props) {
           </svg>
           All posts
         </Link>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={getBlogCoverImage(post.slug)}
+          alt={post.title}
+          className="w-full h-64 object-cover rounded-xl mb-8 bg-spotify-surface"
+        />
 
         {/* Header */}
         <h1 className="text-3xl font-black leading-tight mb-3">{post.title}</h1>

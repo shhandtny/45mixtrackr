@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
-import { blogPosts } from '@/lib/blog-posts';
+import { blogPosts, getBlogCoverImage } from '@/lib/blog-posts';
 
 export const metadata: Metadata = {
   title: 'Blog — 45 Mix Trackr | Vinyl Records, Turntables & DJ Tips',
@@ -23,9 +23,15 @@ export default function BlogPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="block bg-spotify-surface hover:bg-spotify-hover rounded-xl p-6 transition-colors group"
+              className="block bg-spotify-surface hover:bg-spotify-hover rounded-xl overflow-hidden transition-colors group"
             >
-              <div className="flex items-start justify-between gap-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={getBlogCoverImage(post.slug)}
+                alt={post.title}
+                className="w-full h-48 object-cover bg-spotify-surface"
+              />
+              <div className="flex items-start justify-between gap-4 p-6">
                 <div className="min-w-0">
                   <h2 className="text-white font-bold text-lg leading-snug group-hover:text-spotify-green transition-colors">
                     {post.title}

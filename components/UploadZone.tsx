@@ -48,10 +48,20 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
       form.append('file', selectedFile);
 
       const res = await fetch('/api/upload', { method: 'POST', body: form });
-      const data = await res.json();
+
+      if (res.status === 413) {
+        throw new Error('File is too large. Please upload a file under 500 MB.');
+      }
+
+      let data: { jobId?: string; error?: string };
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error('File is too large or the server rejected the upload. Please try a file under 500 MB.');
+      }
 
       if (!res.ok) throw new Error(data.error ?? `Upload failed (${res.status})`);
-      onJobId(data.jobId, selectedFile.name);
+      onJobId(data.jobId!, selectedFile.name);
     } catch (err) {
       setUploadError(err instanceof Error ? err.message : 'Upload failed');
       setUploading(false);

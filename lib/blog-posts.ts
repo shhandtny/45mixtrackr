@@ -4,6 +4,7 @@ export interface BlogPost {
   description: string;
   date: string;
   readTime: string;
+  coverImage?: string;
   content: string;
 }
 
@@ -1841,4 +1842,8 @@ At $75, this is a considered purchase — not an impulse buy. But for the collec
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
+}
+
+export function getBlogCoverImage(slug: string): string {
+  return `/blog-images/${slug}.jpg`;
 }

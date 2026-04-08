@@ -73,10 +73,8 @@ export function MixIdentifier() {
       ].join(' ')}>
         {/* Logo */}
         <div className="px-6 pt-6 pb-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/logo.png" alt="45 Mix Trackr" className="w-8 h-8 object-contain flex-shrink-0 rounded" />
-            <span className="font-synthemesc text-white text-xl leading-tight tracking-wide">mixtrackr</span>
+          <div className="flex items-center">
+            <span className="font-synthemesc text-[#f15a2d] text-xl leading-tight tracking-wide">45mixtrackr</span>
           </div>
           {/* Close button (mobile only) */}
           <button
@@ -127,6 +125,15 @@ export function MixIdentifier() {
                 </div>
               </div>
             )}
+
+            {/* Mobile nav links */}
+            <div className="md:hidden mt-3 px-2 flex flex-col gap-1">
+              {navLinks.filter(l => ['Blog', 'About', 'Contact'].includes(l.label)).map(({ href, label }) => (
+                <Link key={href} href={href} className="text-sm font-bold text-white hover:text-[#B3B3B3] transition-colors uppercase tracking-wide py-1">
+                  {label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -149,21 +156,32 @@ export function MixIdentifier() {
       {/* ── Main Content ── */}
       <main className="flex-1 flex flex-col overflow-hidden bg-spotify-black md:rounded-lg md:m-2 md:ml-0">
 
-        {/* Mobile top bar */}
-        <div className="flex items-center gap-3 px-4 py-3 bg-spotify-surface md:hidden flex-shrink-0">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="text-[#B3B3B3] hover:text-white p-1"
-          >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M3 18v-2h18v2H3zm0-5v-2h18v2H3zm0-5V6h18v2H3z"/>
-            </svg>
-          </button>
-          <div className="flex items-center gap-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/logo.png" alt="45 Mix Trackr" className="w-6 h-6 object-contain rounded" />
-            <span className="font-synthemesc text-white text-sm tracking-wide">mixtrackr</span>
+        {/* Top bar */}
+        <div className="relative flex items-center justify-between px-4 py-3 md:py-5 bg-spotify-surface flex-shrink-0">
+          {/* Left: hamburger (mobile only) */}
+          <div className="flex items-center">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="text-[#B3B3B3] hover:text-white p-1 md:hidden"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M3 18v-2h18v2H3zm0-5v-2h18v2H3zm0-5V6h18v2H3z"/>
+              </svg>
+            </button>
           </div>
+          {/* Center: logo (all screens) */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/45logo.svg" alt="45 Mix Trackr" className="h-8 w-auto object-contain" />
+          </div>
+          {/* Right: nav links (desktop) */}
+          <nav className="hidden md:flex items-center gap-8 pr-6">
+            {navLinks.filter(l => ['Blog', 'About', 'Contact'].includes(l.label)).map(({ href, label }) => (
+              <Link key={href} href={href} className="text-sm font-bold text-white hover:text-[#B3B3B3] transition-colors uppercase tracking-wide">
+                {label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* Gradient header */}
@@ -239,8 +257,8 @@ export function MixIdentifier() {
 
         {/* No job: show upload zone prominently */}
         {!jobId && (
-          <div className="flex-1 flex items-center justify-center px-4 md:px-8">
-            <div className="w-full max-w-lg">
+          <div className="flex-1 overflow-y-auto px-4 md:px-8">
+            <div className="w-full max-w-lg mx-auto py-6">
               <UploadZone onJobId={handleJobId} disabled={isProcessing} />
             </div>
           </div>
