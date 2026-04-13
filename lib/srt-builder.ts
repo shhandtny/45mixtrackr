@@ -3,6 +3,7 @@
 // Plan SC: SRT file imports into DaVinci Resolve / Premiere with correct timecodes (FR-04)
 
 import type { Track } from '@/types';
+import { normalizeTitle, isSameArtist } from '@/lib/track-utils';
 
 /**
  * Convert seconds (float) to SRT timecode format: HH:MM:SS,mmm
@@ -21,6 +22,7 @@ function toSrtTime(totalSeconds: number): string {
 
 /**
  * Merge consecutive duplicate tracks (same title + artist).
+ * Title comparison is normalized to ignore common suffixes like "(Edit)".
  * The merged entry spans from the first start to the last end time.
  * Unrecognized segments are excluded from the SRT output.
  */
@@ -34,8 +36,8 @@ function mergeConsecutiveDuplicates(tracks: Track[]): Track[] {
   for (let i = 1; i < recognized.length; i++) {
     const next = recognized[i];
     const sameTrack =
-      current.title.toLowerCase() === next.title.toLowerCase() &&
-      current.artist.toLowerCase() === next.artist.toLowerCase();
+      normalizeTitle(current.title) === normalizeTitle(next.title) &&
+      isSameArtist(current.artist, next.artist);
 
     if (sameTrack) {
       // Extend end time of current segment
@@ -69,6 +71,13 @@ export function buildSrt(tracks: Track[]): string {
 
   if (entries.length === 0) {
     return ''; // no recognized tracks
+  }
+
+  // Snap each entry's end time to the next entry's start time to prevent overlaps
+  for (let i = 0; i < entries.length - 1; i++) {
+    if (entries[i].endTime > entries[i + 1].startTime) {
+      entries[i] = { ...entries[i], endTime: entries[i + 1].startTime };
+    }
   }
 
   return entries

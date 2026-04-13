@@ -1,6 +1,7 @@
 'use client';
 
 import type { Track } from '@/types';
+import { normalizeTitle, normalizeArtist } from '@/lib/track-utils';
 import { TrackRow } from './TrackRow';
 
 interface TrackListProps {
@@ -12,7 +13,7 @@ export function TrackList({ tracks, newTrackIndices }: TrackListProps) {
   const seen = new Set<string>();
   const recognized = tracks.filter((t) => {
     if (!t.recognized || !t.coverUrl) return false;
-    const key = `${t.title.toLowerCase()}|${t.artist.toLowerCase()}`;
+    const key = `${normalizeTitle(t.title)}|${normalizeArtist(t.artist)}`;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;

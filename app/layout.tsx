@@ -46,6 +46,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3035723569804992"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen bg-spotify-black text-white antialiased">
         {children}
         <CookieBanner />
