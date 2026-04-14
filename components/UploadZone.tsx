@@ -217,6 +217,20 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
           </div>
         </div>
       </div>
+
+      {/* Example video */}
+      <div className="mt-6">
+        <p className="text-white text-sm font-semibold mb-3">See it in action</p>
+        <div className="relative w-full rounded-xl overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+          <iframe
+            src="https://www.youtube.com/embed/Ec8SJeQ7VTw"
+            title="45mixtrackr example mix"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="absolute inset-0 w-full h-full"
+          />
+        </div>
+      </div>
     </div>
   );
 }
