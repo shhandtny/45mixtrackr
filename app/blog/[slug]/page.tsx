@@ -125,7 +125,8 @@ function renderContent(content: string) {
 function formatInline(text: string): string {
   return text
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-white">$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-spotify-green hover:underline">$1</a>');
 }
 
 export default async function BlogPostPage({ params }: Props) {

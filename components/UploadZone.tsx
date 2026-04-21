@@ -1,6 +1,11 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/client';
+import { FREE_LIMIT } from '@/lib/usage';
+import { AuthModal } from '@/components/AuthModal';
+import { UpgradeModal } from '@/components/UpgradeModal';
+import { UsageBanner } from '@/components/UsageBanner';
 
 interface UploadZoneProps {
   onJobId: (jobId: string, fileName: string) => void;
@@ -20,7 +25,29 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [usageCount, setUsageCount] = useState(0);
+  const [userPlan, setUserPlan] = useState<string>('free');
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(async ({ data }) => {
+      if (!data.user) return;
+      setUserId(data.user.id);
+      const { data: profile } = await supabase.from('profiles').select('plan').eq('id', data.user.id).single();
+      if (profile?.plan) setUserPlan(profile.plan);
+      const month = new Date().toISOString().slice(0, 7);
+      const { data: usage } = await supabase.from('usage').select('count').eq('user_id', data.user.id).eq('month', month).single();
+      if (usage) setUsageCount(usage.count);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setUserId(session?.user?.id ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleFile = useCallback((file: File) => {
     setSelectedFile(file);
@@ -40,37 +67,69 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
 
   const handleUpload = async () => {
     if (!selectedFile) return;
+
+    if (!userId) {
+      setShowAuthModal(true);
+      return;
+    }
+
+    if (userPlan !== 'premium' && usageCount >= FREE_LIMIT) {
+      setShowUpgradeModal(true);
+      return;
+    }
+
     setUploading(true);
     setUploadError(null);
 
     try {
-      const form = new FormData();
-      form.append('file', selectedFile);
+      // Step 1: Get a signed upload URL from our API
+      const urlRes = await fetch('/api/upload-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fileName: selectedFile.name }),
+      });
 
-      const res = await fetch('/api/upload', { method: 'POST', body: form });
-
-      if (res.status === 413) {
-        throw new Error('File is too large. Please upload a file under 500 MB.');
+      if (urlRes.status === 401) { setShowAuthModal(true); setUploading(false); return; }
+      if (urlRes.status === 403) { setShowUpgradeModal(true); setUploading(false); return; }
+      if (!urlRes.ok) {
+        const d = await urlRes.json().catch(() => ({}));
+        throw new Error(d.error ?? 'Could not start upload');
       }
 
-      let data: { jobId?: string; error?: string };
-      try {
-        data = await res.json();
-      } catch {
-        throw new Error('File is too large or the server rejected the upload. Please try a file under 500 MB.');
-      }
+      const { jobId, storageKey, token } = await urlRes.json();
 
-      if (!res.ok) throw new Error(data.error ?? `Upload failed (${res.status})`);
-      onJobId(data.jobId!, selectedFile.name);
+      // Step 2: Upload file directly to Supabase Storage via signed URL
+      const supabase = createClient();
+      const { error: storageError } = await supabase.storage
+        .from('job-files')
+        .uploadToSignedUrl(storageKey, token, selectedFile, {
+          contentType: selectedFile.type || 'application/octet-stream',
+        });
+      if (storageError) throw new Error('File upload failed: ' + storageError.message);
+
+      // Step 3: Tell our API to start processing
+      const processRes = await fetch('/api/process', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobId, storageKey, fileName: selectedFile.name }),
+      });
+      if (!processRes.ok) throw new Error('Failed to start processing');
+
+      setUsageCount((c) => c + 1);
+      onJobId(jobId, selectedFile.name);
     } catch (err) {
       setUploadError(err instanceof Error ? err.message : 'Upload failed');
       setUploading(false);
     }
   };
 
+  const atLimit = userPlan !== 'premium' && usageCount >= FREE_LIMIT;
+
   if (compact) {
     return (
       <div>
+        {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
+        {showUpgradeModal && <UpgradeModal onClose={() => setShowUpgradeModal(false)} />}
         <div
           role="button"
           tabIndex={0}
@@ -125,6 +184,13 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
 
   return (
     <div className="w-full">
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
+      {showUpgradeModal && <UpgradeModal onClose={() => setShowUpgradeModal(false)} />}
+
+      {userId && userPlan !== 'premium' && (
+        <UsageBanner count={usageCount} limit={FREE_LIMIT} />
+      )}
+
       <div
         role="button"
         tabIndex={0}
@@ -134,7 +200,7 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
         onDragLeave={() => setIsDragging(false)}
         onDrop={handleDrop}
         className={[
-          'border-2 border-dashed rounded-xl p-16 text-center cursor-pointer transition-colors select-none',
+          'border-2 border-dashed rounded-xl p-16 mt-4 text-center cursor-pointer transition-colors select-none',
           isDragging
             ? 'border-spotify-green bg-spotify-green/10'
             : 'border-spotify-dim hover:border-[#B3B3B3]',
@@ -229,6 +295,31 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
             allowFullScreen
             className="absolute inset-0 w-full h-full"
           />
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <div className="mt-8">
+        <p className="text-white text-sm font-semibold mb-4">Frequently asked questions</p>
+        <div className="space-y-3">
+          {[
+            { q: 'Is 45 Mix Trackr free?', a: 'Free accounts get 3 mix identifications per month. Create a free account to get started — no credit card required.' },
+            { q: 'What file formats are supported?', a: 'MP3, MP4, WAV, M4A, and AAC files up to 500 MB.' },
+            { q: 'How long does it take?', a: 'Most mixes finish in 2–5 minutes. A one-hour mix typically takes around 3 minutes.' },
+            { q: 'How accurate is the recognition?', a: 'We use ACRCloud audio fingerprinting — the same technology behind Shazam — which covers over 10 million songs. It works even through DJ blends and transitions.' },
+            { q: 'What is the SRT file for?', a: 'Import it into DaVinci Resolve, Premiere Pro, or Final Cut Pro to show song names as on-screen text in your mix video, perfectly timed to each track.' },
+            { q: 'Does it work with vinyl mixes?', a: 'Yes. Any audio recording works, including vinyl sets.' },
+          ].map(({ q, a }) => (
+            <details key={q} className="border border-[#282828] rounded-xl overflow-hidden group">
+              <summary className="px-4 py-3 text-white text-xs font-semibold cursor-pointer list-none flex items-center justify-between hover:bg-spotify-hover transition-colors">
+                {q}
+                <svg className="w-4 h-4 text-[#6B6B6B] flex-shrink-0 transition-transform group-open:rotate-180" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </summary>
+              <p className="px-4 pb-3 text-[#B3B3B3] text-xs leading-relaxed">{a}</p>
+            </details>
+          ))}
         </div>
       </div>
     </div>

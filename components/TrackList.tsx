@@ -29,6 +29,7 @@ export function TrackList({ tracks, newTrackIndices }: TrackListProps) {
             <th className="pl-4 pr-2 pb-3 text-right w-10 font-normal">#</th>
             <th className="px-4 pb-3 text-left font-normal">Title</th>
             <th className="px-4 pb-3 text-left font-normal hidden md:table-cell">Album</th>
+            <th className="px-2 pb-3 text-center font-normal hidden md:table-cell text-[#6B6B6B] whitespace-nowrap">Find on Discogs</th>
             <th className="px-4 pb-3 text-right font-normal w-16">
               {/* Clock icon */}
               <svg className="w-4 h-4 inline text-[#6B6B6B]" fill="currentColor" viewBox="0 0 24 24">

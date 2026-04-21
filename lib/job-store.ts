@@ -16,7 +16,9 @@ const jobs: Map<string, Job> = global._jobStore ?? (global._jobStore = new Map()
 export function createJob(
   id: string,
   inputPath: string,
-  workDir: string
+  workDir: string,
+  userId?: string,
+  fileName?: string,
 ): Job {
   const job: Job = {
     id,
@@ -27,6 +29,8 @@ export function createJob(
     totalSegments: 0,
     processedSegments: 0,
     createdAt: Date.now(),
+    userId,
+    fileName,
   };
   jobs.set(id, job);
   return job;

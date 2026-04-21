@@ -2,17 +2,40 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { UploadZone } from './UploadZone';
 import { ProcessingStatus } from './ProcessingStatus';
 import { TrackList } from './TrackList';
 import { DownloadButton } from './DownloadButton';
 import { useJobPoller } from '@/hooks/useJobPoller';
+import { createClient } from '@/lib/supabase/client';
+import type { User } from '@supabase/supabase-js';
 
 export function MixIdentifier() {
   const [jobId, setJobId] = useState<string | null>(null);
   const [mixName, setMixName] = useState<string>('Your Mix');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
   const { tracks, status, step, progress, error } = useJobPoller(jobId);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session?.user) setUser(data.session.user);
+    });
+    supabase.auth.getUser().then(({ data }) => setUser(data.user ?? null));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  async function handleSignOut() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.refresh();
+  }
 
   const newIndicesRef = useRef<Set<number>>(new Set());
   const prevTrackCountRef = useRef(0);
@@ -34,10 +57,31 @@ export function MixIdentifier() {
   const recognizedTracks = tracks.filter((t) => t.recognized && t.coverUrl);
   const coverUrl = recognizedTracks[0]?.coverUrl ?? null;
 
+  // Restore in-progress job on mount
+  useEffect(() => {
+    const savedJobId = localStorage.getItem('activeJobId');
+    const savedMixName = localStorage.getItem('activeMixName');
+    if (savedJobId) {
+      setJobId(savedJobId);
+      setMixName(savedMixName ?? 'Your Mix');
+    }
+  }, []);
+
+  // Clear localStorage when job finishes or errors
+  useEffect(() => {
+    if (status === 'done' || status === 'error') {
+      localStorage.removeItem('activeJobId');
+      localStorage.removeItem('activeMixName');
+    }
+  }, [status]);
+
   function handleJobId(id: string, fileName: string) {
+    const name = fileName.replace(/\.[^.]+$/, '');
     setJobId(id);
-    setMixName(fileName.replace(/\.[^.]+$/, ''));
+    setMixName(name);
     setSidebarOpen(false);
+    localStorage.setItem('activeJobId', id);
+    localStorage.setItem('activeMixName', name);
   }
 
   function handleReset() {
@@ -45,6 +89,8 @@ export function MixIdentifier() {
     setMixName('Your Mix');
     prevTrackCountRef.current = 0;
     newIndicesRef.current = new Set();
+    localStorage.removeItem('activeJobId');
+    localStorage.removeItem('activeMixName');
   }
 
   const navLinks = [
@@ -181,6 +227,34 @@ export function MixIdentifier() {
                 {label}
               </Link>
             ))}
+
+            {/* Account icon with dropdown */}
+            <div className="relative group">
+              <button className="flex items-center justify-center w-8 h-8 rounded-full bg-[#282828] border border-[#535353] hover:border-[#B3B3B3] hover:bg-[#3E3E3E] transition-colors">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                </svg>
+              </button>
+              <div className="absolute right-0 top-full mt-2 w-44 bg-[#282828] rounded-xl shadow-2xl border border-[#3E3E3E] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 py-1">
+                {user ? (
+                  <>
+                    <div className="px-4 py-2 border-b border-[#3E3E3E]">
+                      <p className="text-white text-xs font-semibold truncate">{user.email}</p>
+                    </div>
+                    <Link href="/history" className="block px-4 py-2.5 text-sm text-[#B3B3B3] hover:text-white hover:bg-[#3E3E3E] transition-colors">History</Link>
+                    <Link href="/account" className="block px-4 py-2.5 text-sm text-[#B3B3B3] hover:text-white hover:bg-[#3E3E3E] transition-colors">Account</Link>
+                    <div className="border-t border-[#3E3E3E] mt-1 pt-1">
+                      <button onClick={handleSignOut} className="w-full text-left px-4 py-2.5 text-sm text-[#B3B3B3] hover:text-white hover:bg-[#3E3E3E] transition-colors">Sign out</button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/login" className="block px-4 py-2.5 text-sm text-[#B3B3B3] hover:text-white hover:bg-[#3E3E3E] transition-colors">Sign in</Link>
+                    <Link href="/signup" className="block px-4 py-2.5 text-sm text-spotify-green font-semibold hover:bg-[#3E3E3E] transition-colors">Sign up free</Link>
+                  </>
+                )}
+              </div>
+            </div>
           </nav>
         </div>
 

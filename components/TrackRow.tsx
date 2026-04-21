@@ -75,6 +75,21 @@ export function TrackRow({ track, displayIndex, isNew = false }: TrackRowProps) 
           </p>
         </td>
 
+        {/* Discogs */}
+        <td className="px-2 py-2 hidden md:table-cell text-center">
+          <a
+            href={`https://www.discogs.com/search/?q=${encodeURIComponent(`${track.title} ${track.artist}`)}&type=release`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Search on Discogs"
+            className="flex items-center justify-center w-6 h-6 rounded-full bg-[#FB923C] hover:bg-[#EA580C] transition-colors mx-auto"
+          >
+            <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </td>
+
         {/* Duration */}
         <td className="px-4 py-2 text-right text-[#B3B3B3] text-sm tabular-nums w-16">
           {formatTime(track.endTime)}
@@ -84,7 +99,7 @@ export function TrackRow({ track, displayIndex, isNew = false }: TrackRowProps) 
       {/* Lightbox */}
       {lightbox && track.coverUrl && (
         <tr>
-          <td colSpan={4} className="p-0">
+          <td colSpan={5} className="p-0">
             <div
               className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 cursor-pointer"
               onClick={() => setLightbox(false)}

@@ -12,6 +12,7 @@ import { identifySegment, extractTrackMeta, type ACRCloudConfig } from './acr-cl
 import { fetchCovers } from './cover-fetcher';
 import { buildZip } from './zip-builder';
 import { deduplicateConsecutive } from './track-utils';
+import { persistJobToSupabase } from './job-persist';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const ffmpegPath: string = require('ffmpeg-static');
@@ -165,6 +166,11 @@ export async function recognitionPipeline(job: Job): Promise<void> {
     await buildZip({ ...currentJob, tracks: dedupedTracks }, zipPath);
 
     setJobStatus(job.id, 'done');
+
+    // Persist to Supabase for logged-in users (non-blocking)
+    persistJobToSupabase({ ...getJob(job.id)!, status: 'done' }).catch((err) => {
+      console.error(`Persist error for job ${job.id}:`, err);
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     setJobStatus(job.id, 'error', message);

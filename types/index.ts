@@ -38,6 +38,8 @@ export interface Job {
   processedSegments: number;
   error?: string;
   createdAt: number;
+  userId?: string;
+  fileName?: string;
 }
 
 // ACRCloud REST API response shape
