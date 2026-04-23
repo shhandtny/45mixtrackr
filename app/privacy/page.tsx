@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy — 45 Mix Trackr',
   description:
     'Privacy Policy for 45 Mix Trackr. Learn how we collect, use, and protect your data, including Google AdSense cookies, GDPR, and CCPA rights.',
+  alternates: { canonical: '/privacy' },
 };
 
 export default function PrivacyPage() {

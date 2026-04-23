@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'Blog — 45 Mix Trackr | Vinyl Records, Turntables & DJ Tips',
   description: 'Tips, guides, and insights for vinyl DJs and music lovers. Learn how to identify songs in a DJ mix, store vinyl records, set up turntables, and more.',
   keywords: 'DJ mix tracklist, identify songs in mix, vinyl records, turntable setup, 45 RPM adapter, vinyl vs digital DJing, DJ tips',
+  alternates: { canonical: '/blog' },
 };
 
 export default function BlogPage() {

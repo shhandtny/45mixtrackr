@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'About — 45 Mix Trackr',
   description:
     'Learn how 45 Mix Trackr works. A free audio fingerprinting tool that identifies every song in a DJ mix and generates tracklists with album covers and SRT subtitle files.',
+  alternates: { canonical: '/about' },
 };
 
 export default function AboutPage() {
