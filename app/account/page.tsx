@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { PageShell } from '@/components/PageShell';
 import { createClient } from '@/lib/supabase/client';
@@ -11,7 +11,7 @@ interface Profile {
   stripe_customer_id: string | null;
 }
 
-export default function AccountPage() {
+function AccountPageInner() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [usageCount, setUsageCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -146,5 +146,13 @@ export default function AccountPage() {
         )}
       </div>
     </PageShell>
+  );
+}
+
+export default function AccountPage() {
+  return (
+    <Suspense>
+      <AccountPageInner />
+    </Suspense>
   );
 }
