@@ -1,11 +1,19 @@
 {
   "version": 1,
   "functions": {
+    "/api/history-download/[id]": {},
+    "/api/download/[id]": {},
     "/api/result/[id]": {},
-    "/api/upload": {
+    "/api/process": {
       "maxDuration": 300
     },
+    "/api/stripe/portal": {},
+    "/api/upload-url": {},
     "/api/status/[id]": {},
-    "/api/download/[id]": {}
+    "/api/stripe/checkout": {},
+    "/api/stripe/webhook": {},
+    "/api/upload": {
+      "maxDuration": 300
+    }
   }
 }

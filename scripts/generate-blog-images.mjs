@@ -90,6 +90,18 @@ const posts = [
     slug: '3d-printed-vinyl-storage-box-premium-customizable',
     prompt: 'Premium 3D printed customizable vinyl record storage box, sleek modern design, dark studio photography, orange accent lighting',
   },
+  {
+    slug: 'how-to-get-tracklist-from-dj-mix',
+    prompt: 'A smartphone screen showing a song identification app with tracklist results, DJ mixer in background, dark moody lighting, orange accent glow',
+  },
+  {
+    slug: 'how-to-add-song-titles-to-dj-mix-video',
+    prompt: 'Video editing software timeline with subtitle text overlay showing song titles, dark professional workstation setup, monitor glow, cinematic style',
+  },
+  {
+    slug: 'how-to-download-album-covers-for-dj-sets',
+    prompt: 'Grid of colorful vinyl record album covers arranged neatly on a dark surface, diverse music genres, top-down photography, warm lighting',
+  },
 ];
 
 async function generateImage(prompt) {

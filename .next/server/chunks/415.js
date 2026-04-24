@@ -1,4 +1,4 @@
-"use strict";exports.id=415,exports.ids=[415],exports.modules={62415:(a,b,c)=>{c.d(b,{A:()=>d,f:()=>e});let d=[{slug:"how-to-identify-songs-in-a-dj-mix",title:"How to Identify Songs in a DJ Mix (The Complete Guide)",description:"Struggling to find out what songs are in a DJ mix? Learn the best methods to identify every track — from audio fingerprinting tools to manual research techniques.",date:"April 1, 2025",readTime:"7 min read",content:`
+"use strict";exports.id=415,exports.ids=[415],exports.modules={62415:(a,b,c)=>{c.d(b,{A5:()=>d,fv:()=>e,zm:()=>f});let d=[{slug:"how-to-identify-songs-in-a-dj-mix",title:"How to Identify Songs in a DJ Mix (The Complete Guide)",description:"Struggling to find out what songs are in a DJ mix? Learn the best methods to identify every track — from audio fingerprinting tools to manual research techniques.",date:"April 1, 2025",readTime:"7 min read",content:`
 ## Introduction
 
 You've just finished recording a killer DJ set, and now you need to build the tracklist. Or maybe you've downloaded a mix from SoundCloud and you're desperate to know what that euphoric track at the 42-minute mark is. Either way, identifying songs in a DJ mix used to mean hours of digging through music forums, rewinding, and guessing. Not anymore.
@@ -1683,4 +1683,182 @@ It's practical, it's handmade, it's personalized, and it's from a maker who actu
 At $75, this is a considered purchase — not an impulse buy. But for the collector who has been meaning to properly organize their 7-inch singles, or the DJ who wants storage that holds up on the road, the value is obvious the moment you see the product in person.
 
 **Order on Etsy:** [3D Printed 7-Inch Vinyl Record Storage Box — Premium, Customizable](https://www.etsy.com/listing/4301266679/3d-printed-7-inch-vinyl-record-storage)
-    `.trim()}];function e(a){return d.find(b=>b.slug===a)}}};
+    `.trim()},{slug:"how-to-get-tracklist-from-dj-mix",title:"How to Get a Tracklist from Any DJ Mix (Free & Fast)",description:"Need a tracklist from a DJ mix? Learn how to automatically extract every song title and artist from any audio or video mix file — free, no app required.",date:"April 15, 2025",readTime:"5 min read",content:`
+## Why You Need a DJ Mix Tracklist
+
+Whether you've just finished recording your own set or downloaded a mix you love, getting a complete tracklist is essential — especially if you're uploading to YouTube or SoundCloud where audiences expect to know what they're listening to.
+
+The old way meant rewinding, listening, Shazam-ing one track at a time, and spending hours on research. There's a much better way now.
+
+---
+
+## The Fastest Method: Audio Fingerprinting
+
+[Audio fingerprinting](/blog/what-is-audio-fingerprinting) is the same technology used by Shazam, but applied to your entire mix at once. It analyzes the audio, splits it into segments, and matches each segment against a database of millions of songs.
+
+**[45 Mix Trackr](/)** does this automatically:
+
+1. Upload your mix file (MP3, MP4, WAV, M4A — up to 500 MB)
+2. The tool splits the mix into 30-second windows
+3. Each segment is matched against ACRCloud's fingerprint database
+4. You get a full tracklist with song titles, artists, and album covers
+5. Download a ZIP with all artwork and an SRT subtitle file
+
+A one-hour mix is typically identified in under 5 minutes.
+
+---
+
+## What You Get
+
+- **Full tracklist** — every recognized song with title and artist
+- **Album cover art** — downloaded automatically for every track
+- **SRT file** — import into DaVinci Resolve, Premiere Pro, or Final Cut Pro to show song names as on-screen text in your video
+
+The [SRT subtitle file](/blog/how-to-create-a-dj-mix-tracklist) is especially useful if you post DJ mix videos on YouTube. Instead of listing tracks in the description, song names appear directly on screen, timed to when each track plays.
+
+---
+
+## What If Some Tracks Aren't Recognized?
+
+Audio fingerprinting works best for commercially released songs. Very rare, white-label, or unreleased tracks may not be in the database. For those, try:
+
+- **Shazam** — hold your phone near the speaker and identify one track at a time
+- **DJ forums** — post a clip to Reddit's r/ifyoulikeblank or vinyl communities
+- **Mixcloud** — if the DJ posted the mix there, they may have tagged the tracklist
+
+---
+
+## Tips for Better Recognition
+
+- Use the highest quality audio file available (WAV or high-bitrate MP3)
+- Avoid files with heavy radio effects or pitched-down audio
+- If a live recording has crowd noise, recognition accuracy will be lower but most tracks will still be found
+
+Try [45 Mix Trackr](/) free — no signup required.
+    `.trim()},{slug:"how-to-add-song-titles-to-dj-mix-video",title:"How to Add Song Titles to a DJ Mix Video (SRT Method)",description:"Learn how to add automatic song title overlays to your DJ mix YouTube video using an SRT subtitle file — works with DaVinci Resolve, Premiere Pro, and Final Cut Pro.",date:"April 15, 2025",readTime:"6 min read",content:`
+## Why Add Song Titles to Your Mix Video?
+
+Viewers watching DJ mix videos on YouTube always want to know what's playing. Pinning a tracklist in the comments works, but it forces people to pause and scroll. A much better approach: show the song name directly on screen, fading in when each track starts.
+
+This is exactly what an SRT subtitle file does — and it takes minutes to set up once you have the file.
+
+---
+
+## Step 1: Generate Your SRT File
+
+The easiest way is to use **[45 Mix Trackr](/)**, which identifies every song in your mix and generates a ready-to-use SRT file automatically.
+
+1. Upload your mix (MP3, MP4, WAV, M4A up to 500 MB)
+2. Wait 2–5 minutes while the songs are identified
+3. Download the ZIP — it contains your SRT file and all album cover artwork
+
+The SRT file includes the song name and artist for every recognized track, with timestamps matching exactly when each song starts in your mix.
+
+---
+
+## Step 2: Import into Your Video Editor
+
+### DaVinci Resolve
+1. Open your project and go to the **Edit** page
+2. In the media pool, import the .srt file
+3. Drag it onto the timeline above your video track
+4. The subtitles will appear automatically — adjust font, size, and position in the **Inspector**
+
+### Adobe Premiere Pro
+1. Go to **File → Import** and select your .srt file
+2. Drag the subtitle clip onto the timeline
+3. Adjust style via **Captions** panel
+
+### Final Cut Pro
+1. Go to **File → Import → Captions**
+2. Select your .srt file
+3. FCP places each subtitle at the correct timecode automatically
+
+---
+
+## Step 3: Style Your Song Titles
+
+Most editors let you customize the subtitle appearance. Common choices for DJ mix videos:
+- **Font**: Clean sans-serif (Helvetica, Arial, Montserrat)
+- **Position**: Bottom-left or bottom-center
+- **Size**: Readable but not dominant — around 36–48pt at 1080p
+- **Animation**: Fade in/out for a polished look (DaVinci and Premiere support this natively)
+
+---
+
+## Step 4: Upload to YouTube
+
+YouTube also accepts SRT files as a separate caption track. When uploading your video:
+1. Go to **Subtitles** in YouTube Studio
+2. Click **Add** → **Upload file** → **With timing**
+3. Upload your .srt file
+
+This makes the tracklist searchable and accessible — a bonus for SEO.
+
+---
+
+## The Complete Workflow
+
+[Identify your mix with 45 Mix Trackr](/) → Download SRT → Import into video editor → Export and upload.
+
+The whole process from mix to finished YouTube video typically takes under 30 minutes, and the result looks completely professional. Check out the [example video on our homepage](/) to see it in action.
+
+If you want to learn more about how song recognition works, read [What is Audio Fingerprinting?](/blog/what-is-audio-fingerprinting)
+    `.trim()},{slug:"how-to-download-album-covers-for-dj-sets",title:"How to Download Album Covers for Your DJ Set (Bulk & Automatic)",description:"Need album cover art for your DJ set or YouTube thumbnail? Learn how to download album covers in bulk automatically from any mix file — free.",date:"April 15, 2025",readTime:"4 min read",content:`
+## Why DJs Need Album Cover Art
+
+Album artwork is everywhere in modern DJ culture:
+- YouTube thumbnails and video overlays
+- Instagram and social media posts promoting your set
+- Streaming platform artwork for mix uploads
+- Digital crates and playlist management software
+
+Finding covers one by one on Google Images or Apple Music is tedious. Here's how to get all of them in one go.
+
+---
+
+## The Automatic Method
+
+**[45 Mix Trackr](/)** identifies every song in your mix and downloads the album cover for each recognized track automatically.
+
+Here's how it works:
+
+1. Upload your mix file (MP3, MP4, WAV, M4A up to 500 MB)
+2. The tool identifies each song using [audio fingerprinting](/blog/what-is-audio-fingerprinting)
+3. For every recognized track, it fetches the official album artwork
+4. All covers are bundled into a ZIP file for download
+
+You get high-quality JPG files named by track title and artist — ready to use in your video editor, social posts, or digital crate.
+
+---
+
+## What the ZIP Contains
+
+When you download from 45 Mix Trackr, your ZIP includes:
+
+- **Album covers** — one JPG per recognized track, named Title-Artist.jpg
+- **SRT subtitle file** — for adding song names to your [DJ mix video](/blog/how-to-add-song-titles-to-dj-mix-video)
+
+---
+
+## Manual Methods (For Individual Tracks)
+
+If you only need one or two covers:
+
+- **iTunes/Apple Music** — right-click a song → Get Info → Artwork
+- **Discogs** — search the release, covers are high resolution for vinyl releases
+- **Last.fm** — search artist and album, good for older releases
+- **MusicBrainz** → Cover Art Archive — open-source, high quality
+
+For a full DJ set with 20–30 tracks, doing this manually takes 30+ minutes. The automatic approach with [45 Mix Trackr](/) takes about 3 minutes total.
+
+---
+
+## Tips for Getting the Best Artwork
+
+- Upload the highest quality audio you have — better recognition = more covers found
+- WAV or high-bitrate MP3 gives the best fingerprinting results
+- Rare or unreleased tracks may not be recognized, but most commercially released songs are covered
+
+[Try 45 Mix Trackr free →](/)
+    `.trim()}];function e(a){return d.find(b=>b.slug===a)}function f(a){return`/blog-images/${a}.jpg`}}};
