@@ -1,7 +1,7 @@
 'use client';
 // Design Ref: §7 useJobPoller — poll /api/status every 2s, replace full track list each time
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import type { Track, JobStatus } from '@/types';
 
 const POLL_INTERVAL_MS = 2000;
@@ -20,11 +20,13 @@ export function useJobPoller(jobId: string | null): PollerState {
   const [step, setStep] = useState('');
   const [progress, setProgress] = useState({ processed: 0, total: 0 });
   const [error, setError] = useState<string | null>(null);
+  const stopRef = useRef(false);
 
   const poll = useCallback(async () => {
-    if (!jobId) return;
+    if (!jobId || stopRef.current) return;
     try {
       const res = await fetch(`/api/status/${jobId}`);
+      if (res.status === 404) { stopRef.current = true; setStatus('error'); setError('Job not found — please upload again.'); return; }
       if (!res.ok) return;
       const data = await res.json();
 
@@ -42,6 +44,7 @@ export function useJobPoller(jobId: string | null): PollerState {
     if (!jobId) return;
 
     // Reset state when a new job starts
+    stopRef.current = false;
     setTracks([]);
     setStatus(null);
     setStep('');

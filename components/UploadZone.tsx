@@ -228,7 +228,7 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
           <div>
             <p className="text-white text-lg font-bold">Drop your mix here</p>
             <p className="text-[#B3B3B3] text-sm mt-1">
-              or click to browse &mdash; MP3, MP4, WAV, M4A up to 500 MB
+              or click to browse &mdash; MP3, MP4, WAV, M4A up to 50 MB
             </p>
           </div>
         )}
@@ -304,7 +304,7 @@ export function UploadZone({ onJobId, disabled = false, compact = false }: Uploa
         <div className="space-y-3">
           {[
             { q: 'Is 45 Mix Trackr free?', a: 'Free accounts get 3 mix identifications per month. Create a free account to get started — no credit card required.' },
-            { q: 'What file formats are supported?', a: 'MP3, MP4, WAV, M4A, and AAC files up to 500 MB.' },
+            { q: 'What file formats are supported?', a: 'MP3, MP4, WAV, M4A, and AAC files up to 50 MB.' },
             { q: 'How long does it take?', a: 'Most mixes finish in 2–5 minutes. A one-hour mix typically takes around 3 minutes.' },
             { q: 'How accurate is the recognition?', a: 'We use ACRCloud audio fingerprinting — the same technology behind Shazam — which covers over 10 million songs. It works even through DJ blends and transitions.' },
             { q: 'What is the SRT file for?', a: 'Import it into DaVinci Resolve, Premiere Pro, or Final Cut Pro to show song names as on-screen text in your mix video, perfectly timed to each track.' },
