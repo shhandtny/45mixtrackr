@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: '45 Mix Trackr — Free DJ Mix Song Identifier & Tracklist Generator',
   description:
     'Free DJ mix tracklist generator. Upload any audio or video mix to identify every song instantly — get titles, artists, album covers, and a downloadable SRT subtitle file for YouTube.',
-  alternates: { canonical: 'https://www.45mixtrackr.com' },
+  alternates: { canonical: 'https://www.45mixtrackr.com/' },
 };
 
 const webAppSchema = {
