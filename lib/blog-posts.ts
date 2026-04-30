@@ -2040,6 +2040,290 @@ For a full DJ set with 20–30 tracks, doing this manually takes 30+ minutes. Th
 [Try 45 Mix Trackr free →](/)
     `.trim(),
   },
+  {
+    slug: 'what-is-audio-fingerprinting',
+    title: 'What Is Audio Fingerprinting? How Music Recognition Technology Works',
+    description: 'Learn how audio fingerprinting works — the technology behind Shazam, ACRCloud, and DJ mix identification tools. Understand why it works even through blends and effects.',
+    date: 'April 30, 2026',
+    readTime: '6 min read',
+    content: `
+## Introduction
+
+Every time you hold your phone up to a speaker and Shazam identifies a song in seconds, audio fingerprinting is doing the work. It's also the same technology that powers DJ mix identification tools like [45 Mix Trackr](/). But how does it actually work — and why does it succeed even through DJ blends, filters, and vinyl crackle?
+
+This guide breaks down audio fingerprinting in plain language.
+
+---
+
+## What Is an Audio Fingerprint?
+
+An audio fingerprint is a compact digital summary of a piece of audio — similar to how a human fingerprint uniquely identifies a person. It's not a recording of the audio itself. Instead, it's a mathematical representation of the audio's most distinctive characteristics: the peaks in the frequency spectrum at specific moments in time.
+
+When a song is added to a fingerprinting database, the system analyzes it and stores thousands of these frequency-peak coordinates as a fingerprint. When you later submit an unknown audio clip, the system generates its fingerprint and searches for a match.
+
+---
+
+## How the Matching Works
+
+The matching process happens in three steps:
+
+**1. Spectrogram generation**
+The audio is converted into a spectrogram — a visual map of how the frequencies in the sound change over time. You can think of it as a detailed picture of the audio's unique "shape."
+
+**2. Peak extraction**
+The algorithm identifies the loudest, most prominent frequency peaks in the spectrogram. These peaks are stable landmarks — they survive compression, background noise, and even mixing with other songs.
+
+**3. Hash matching**
+Pairs of peaks are combined into hash values that encode frequency, time, and the relationship between the two peaks. These hashes are looked up in the database. If enough hashes match a known song, it's identified.
+
+---
+
+## Why It Works in DJ Mixes
+
+DJ mixing adds a layer of complexity that seems like it should break fingerprinting:
+
+- Two songs playing simultaneously during a blend
+- EQ filtering (cutting bass or highs)
+- Reverb, echo, and other effects
+- Tempo and pitch adjustment (key lock)
+
+The reason fingerprinting survives all of this is that it doesn't try to match the full audio — only the strongest peaks. When a DJ mixes in a new track, the incoming song's dominant peaks are still present in the combined signal, even if they're quieter. As the blend completes and the first song fades out, those peaks become dominant and matching becomes easier.
+
+This is why tools like [45 Mix Trackr](/) split a mix into 30-second segments before sending them to the fingerprinting engine — it gives the algorithm isolated windows where one song's peaks dominate, significantly improving accuracy during transitions.
+
+---
+
+## What Cannot Be Fingerprinted?
+
+Audio fingerprinting has limits:
+
+- **Unreleased tracks** — if a song was never submitted to the database, it cannot be matched
+- **Live recordings** — a live performance of a song sounds different enough from the studio version that it may not match
+- **Heavily manipulated audio** — extreme pitch shifting or time-stretching beyond normal DJ use can alter peaks enough to break matching
+- **Very obscure releases** — smaller independent releases may not be in the database
+
+The ACRCloud database used by 45 Mix Trackr covers over 100 million tracks, including most commercially released music worldwide.
+
+---
+
+## Audio Fingerprinting vs. Metadata Matching
+
+There are two main ways music recognition can work:
+
+| Method | How it works | Best for |
+|--------|-------------|----------|
+| Audio fingerprinting | Analyzes the actual audio signal | Any audio source, live recordings, mixes |
+| Metadata matching | Reads embedded ID3 tags | Files you already own with tagged data |
+
+Audio fingerprinting is far more powerful for DJ mixes because it works from the sound itself — no tags or prior knowledge needed.
+
+---
+
+## Conclusion
+
+Audio fingerprinting is one of the most elegant technologies in modern music software. By reducing audio to a sparse map of frequency peaks, it can identify songs in seconds — even through the complex layering of a DJ mix. If you've ever wondered how a tool can scan an hour-long mix and return a full tracklist in minutes, now you know.
+
+[Try 45 Mix Trackr — identify songs in any mix →](/)
+    `.trim(),
+  },
+  {
+    slug: 'how-to-make-dj-mix-video-with-song-titles',
+    title: 'How to Make a DJ Mix Video with Song Titles (Automatic Subtitles)',
+    description: 'Learn how to add automatic song title subtitles to your DJ mix video for YouTube, Instagram, and TikTok — using SRT files generated from audio fingerprinting.',
+    date: 'April 30, 2026',
+    readTime: '5 min read',
+    content: `
+## Introduction
+
+The best DJ mix videos on YouTube have one thing in common: they show you exactly what song is playing in real time. Song name, artist, and timing — displayed as on-screen text as each track drops. It makes the video more engaging, helps viewers discover music they love, and keeps people watching longer.
+
+The good news: you don't need to manually type timestamps for every track. Here's how to do it automatically.
+
+---
+
+## The Tool You Need: An SRT File
+
+An SRT (SubRip Text) file is a standard subtitle format supported by every major video editor — DaVinci Resolve, Premiere Pro, Final Cut Pro, CapCut, and more. It's a plain text file that contains:
+
+- A sequence number for each subtitle
+- A start and end timestamp
+- The text to display (in this case, the song title and artist)
+
+A typical SRT entry looks like this:
+
+\`\`\`
+14
+00:23:45,000 --> 00:26:30,000
+Strings of Life — Derrick May
+\`\`\`
+
+Generating this file manually for a 20-track mix would take hours. [45 Mix Trackr](/) does it automatically.
+
+---
+
+## Step 1: Generate Your SRT File
+
+1. Go to [45mixtrackr.com](/) and upload your mix file (MP3, MP4, WAV, or M4A)
+2. The tool identifies every song using [audio fingerprinting](/blog/what-is-audio-fingerprinting)
+3. Once processing is complete, download the ZIP file
+4. Inside the ZIP you will find your **SRT subtitle file**, with every recognized track timed to the second
+
+The whole process takes 2–5 minutes for a typical hour-long mix.
+
+---
+
+## Step 2: Import the SRT into Your Video Editor
+
+**DaVinci Resolve:**
+1. In the Edit timeline, go to **File → Import → Subtitles**
+2. Select your .srt file
+3. A subtitle track appears in your timeline — drag it to align with your video
+4. Customize the font, size, and position in the Inspector panel
+
+**Adobe Premiere Pro:**
+1. Go to **File → Import** and select your .srt file
+2. It appears in your Project panel as a caption file
+3. Drag it to the timeline above your video track
+4. Adjust styling in the Essential Graphics panel
+
+**Final Cut Pro:**
+1. Go to **File → Import → Captions**
+2. Select your .srt file
+3. Captions appear connected to the video in the timeline
+
+**CapCut (mobile/desktop):**
+Use the **Text** tool and add each song title manually at the right timestamps, using your SRT file as a reference guide.
+
+---
+
+## Step 3: Style Your Song Titles
+
+Now that your song titles are in the timeline, style them to match your brand:
+
+- **Position**: Lower third (bottom-left) is the most common for music videos
+- **Font**: Clean sans-serif fonts like Helvetica, Inter, or Montserrat read well
+- **Duration**: Each subtitle displays for the full length of the track — already set correctly in the SRT
+- **Animation**: A subtle fade-in makes each song title feel like a natural reveal
+
+---
+
+## Tips for the Best Results
+
+- **Upload high-quality audio** — WAV or 320kbps MP3 gives the best fingerprinting accuracy, which means more tracks recognized and more subtitle entries
+- **Check the SRT before importing** — open it in a text editor and scan for any obvious misidentifications
+- **For tracks not recognized**: manually add them to the SRT file using the same timestamp format as the other entries
+
+---
+
+## Conclusion
+
+Adding song titles to a DJ mix video is one of the most effective ways to grow an audience — viewers who can identify every track are far more likely to follow and share. With [45 Mix Trackr](/) generating your SRT file automatically and any major video editor importing it in seconds, there is no reason to skip this step.
+
+[Generate your tracklist and SRT file free →](/)
+    `.trim(),
+  },
+  {
+    slug: 'how-to-share-dj-mix-online-with-tracklist',
+    title: 'How to Share a DJ Mix Online with a Full Tracklist',
+    description: 'A complete guide to sharing DJ mixes on YouTube, SoundCloud, Mixcloud, and Instagram — with a proper tracklist, song credits, and album art.',
+    date: 'April 30, 2026',
+    readTime: '5 min read',
+    content: `
+## Introduction
+
+You have recorded a great set. Now what? Sharing a DJ mix online without a tracklist is like publishing a playlist with no song names — listeners cannot discover the music, cannot share specific tracks, and cannot give you proper feedback on your selections. A full tracklist makes your mix significantly more shareable and helps it perform better on every platform.
+
+Here is how to share your mix properly, with a full tracklist, on every major platform.
+
+---
+
+## Step 1: Build Your Tracklist Automatically
+
+If you did not log your tracks in real time during the set, [45 Mix Trackr](/) can generate the full tracklist from your recording:
+
+1. Upload your mix file (MP3, MP4, WAV, M4A)
+2. It splits the audio and runs [audio fingerprinting](/blog/what-is-audio-fingerprinting) on each segment
+3. Returns song title, artist, and album cover for every recognized track
+4. Generates a downloadable tracklist and SRT subtitle file
+
+For a one-hour mix, this typically takes 2–4 minutes. You get a tracklist with timestamps ready to paste directly into any platform's description.
+
+---
+
+## Platform-by-Platform Guide
+
+### YouTube
+
+YouTube is the most powerful platform for long-form DJ content. An hour-long mix can rank in search and generate views for years.
+
+**Best practices:**
+- Add the full tracklist in the **video description** with timestamps (e.g., \`00:23:45 - Strings of Life — Derrick May\`)
+- Pin a comment with the tracklist so it is visible immediately
+- Use the SRT file generated by 45 Mix Trackr to [add on-screen song titles](/blog/how-to-make-dj-mix-video-with-song-titles) to your video
+- Add relevant tags: artist names, genre, year, event name
+
+**Copyright note:** YouTube's Content ID system may flag mixes containing commercially released music. You may receive ad revenue claims from rights holders — this is common and usually means ads run on your video with revenue shared.
+
+---
+
+### SoundCloud
+
+SoundCloud is the go-to platform for DJ culture, especially for underground genres.
+
+**Best practices:**
+- Paste your tracklist in the **track description**
+- Tag each artist name individually in the tags field
+- Set the genre correctly — it affects who discovers your mix
+- Use a high-quality JPG from your album cover ZIP as the track artwork
+
+SoundCloud Pro allows uploads over 3 hours; the free tier limits you to 3 hours of total upload time.
+
+---
+
+### Mixcloud
+
+Mixcloud is designed specifically for DJ mixes and radio shows. It has built-in licensing agreements with rights holders, which means your mix will not be taken down for copyright.
+
+**Best practices:**
+- Enter each track manually using Mixcloud's **tracklist builder** as you upload — it links to the official song pages
+- Set the exact start time for each track using the tracklist editor
+- Use chapter markers to let listeners jump to specific tracks
+
+---
+
+### Instagram and TikTok
+
+Short clips (30–90 seconds) work best here. Use a highlight from your mix — ideally a peak moment with a recognizable track.
+
+**Best practices:**
+- Add the song title and artist as text overlay using your video editor or Stories text tool
+- Include the song name in the caption for searchability
+- Tag the artists if they have accounts — they may reshare
+
+---
+
+## Formatting Your Tracklist for Copy-Paste
+
+A format that works well across all platforms:
+
+\`\`\`
+TRACKLIST:
+00:00:00 - Track Title — Artist Name
+00:04:15 - Track Title — Artist Name
+00:08:30 - Track Title — Artist Name
+\`\`\`
+
+45 Mix Trackr outputs your tracklist with timestamps already in this format — ready to paste directly into YouTube, SoundCloud, or Mixcloud.
+
+---
+
+## Conclusion
+
+A DJ mix without a tracklist is a missed opportunity. Your track selections are part of your artistic identity — showcase them. With [45 Mix Trackr](/) generating your tracklist automatically in minutes, there is no excuse to upload without one. Share the music, credit the artists, and give your listeners a reason to come back.
+
+[Build your tracklist in minutes →](/)
+    `.trim(),
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
