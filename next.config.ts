@@ -4,6 +4,16 @@ import type { NextConfig } from 'next';
 // so formidable can handle multipart streams directly (supports up to 500 MB)
 const nextConfig: NextConfig = {
   devIndicators: false,
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: '45mixtrackr.com' }],
+        destination: 'https://www.45mixtrackr.com/:path*',
+        permanent: true,
+      },
+    ];
+  },
   serverExternalPackages: ['fluent-ffmpeg', 'ffmpeg-static'],
   experimental: {
     serverActions: {
