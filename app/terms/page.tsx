@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service — 45 Mix Trackr',
   description:
     'Terms of Service for 45 Mix Trackr. Read our usage rules, subscription billing terms, cancellation policy, intellectual property policy, and limitations.',
-  alternates: { canonical: '/terms' },
+  alternates: { canonical: 'https://www.45mixtrackr.com/terms' },
 };
 
 export default function TermsPage() {

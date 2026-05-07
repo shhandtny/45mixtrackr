@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Contact — 45 Mix Trackr',
   description:
     'Get in touch with the 45 Mix Trackr team. Send us questions, feedback, or bug reports and we\'ll get back to you.',
-  alternates: { canonical: '/contact' },
+  alternates: { canonical: 'https://www.45mixtrackr.com/contact' },
 };
 
 export default function ContactPage() {
